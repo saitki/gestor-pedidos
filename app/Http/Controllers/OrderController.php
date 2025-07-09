@@ -33,8 +33,8 @@ class OrderController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
-            'fecha_pedido' => 'required|date', 
-            'estado' => 'required|string|max:255', 
+            'fecha_pedido' => 'required|date',
+            'estado' => 'required|string|in:pendiente,en_proceso,completado',
         ]);
         
         try {
