@@ -9,31 +9,33 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="createOrderForm" action="{{ url('/pedidos') }}" method="POST">
+                <form id="createOrderForm" action="{{ route('orders.store') }}" method="POST">                    
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="user_id" class="form-label">Usuario</label>
-                                <select class="form-select" id="user_id" name="user_id" required>
-                                    <option value="">Seleccionar usuario...</option>
-                                    {{-- Aquí cargarías los usuarios desde el controlador --}}
+                                <select name="user_id" class="form-control" required>
+                                    <option value="">Seleccionar usuario</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->nombre }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="date_order" class="form-label">Fecha del Pedido</label>
-                                <input type="date" class="form-control" id="date_order" name="date_order" required>
+                                <label for="fecha_pedido" class="form-label">Fecha del Pedido</label>
+                                <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido" required>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Estado</label>
-                        <select class="form-select" id="status" name="status" required>
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="estado" required>
                             <option value="">Seleccionar estado...</option>
                             <option value="pendiente">Pendiente</option>
-                            <option value="en_proceso">En_Proceso</option>
+                            <option value="en_proceso">En Proceso</option>
                             <option value="completado">Completado</option>
                         </select>
                     </div>
