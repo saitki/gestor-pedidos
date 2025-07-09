@@ -15,6 +15,6 @@
     </style>
     <div class="container text-center py-3">
         <p class="mb-0">© {{ date('Y') }} Gestor de Pedidos. Todos los derechos reservados.</p>
-        <p class="mb-0">Desarrollado por <a href="">Tu Nombre</a></p>
-        </div>
+        <p class="mb-0">Desarrollado por Alejandro Lenier Ireta Xiu</p>
+    </div>
 </footer>
