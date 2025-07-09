@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+@extends('layouts.app')
+@section('title', 'Gestor de pedidos')
+@section('content')
+    <div class="hero-container">
+        <h1>Welcome to the Order Management System</h1>
+        <p>Manage your orders efficiently and effectively.</p>
+    </div>
+    @include('modals.create-order')
+
+@endsection
