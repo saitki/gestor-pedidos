@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,7 +13,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        $users = User::all();
+        return view('index', compact('orders', 'users')); 
     }
 
     /**
@@ -28,7 +31,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'fecha_pedido' => 'required|date', 
+            'estado' => 'required|string|max:255', 
+        ]);
+        
+        try {
+            Order::create($validatedData);
+            return redirect()->route('orders.index')->with('success', 'Orden creado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al crear la orden: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -52,7 +66,18 @@ class OrderController extends Controller
      */
     public function update(Request $request, order $order)
     {
-        //
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'fecha_pedido' => 'required|date',
+            'estado' => 'required|string|in:pendiente,en_proceso,completado',
+        ]);
+
+        try {
+            $order->update($validatedData);
+            return redirect()->route('orders.index')->with('success', 'Orden actualizado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al actualizar el orden: ' . $e->getMessage());
+        }    
     }
 
     /**
@@ -60,6 +85,11 @@ class OrderController extends Controller
      */
     public function destroy(order $order)
     {
-        //
+        try {
+            $order->delete();
+            return redirect()->route('orders.index')->with('success', 'Orden eliminado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al eliminar el orden: ' . $e->getMessage());
+        }    
     }
 }
