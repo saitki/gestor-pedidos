@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nombre',
         'email',
     ];
 
@@ -33,10 +33,8 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    public function orders()
     {
-        return [
-            
-        ];
+        return $this->hasMany(Order::class);
     }
 }
