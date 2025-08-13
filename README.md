@@ -1,6 +1,6 @@
 # Gestor de ordenes
 
-Un sistema web para gestionar peordenesdidos desarrollado con Laravel y Bootstrap.
+Un sistema web para gestionar pedidos desarrollado con Laravel y Bootstrap.
 
 ## Características
 * CRUD completo para ordenes (Crear, Leer, Actualizar, Eliminar)
